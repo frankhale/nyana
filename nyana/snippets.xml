@@ -1,0 +1,474 @@
+<!-- SNIPPETS DEFINITION USED BY NYANA http://nyana.sf.net -->
+
+<snippets>
+
+<!-- COMMON SNIPPETS -->
+
+<snippet shortcut="pkg" language="common">
+# Description: ${description}
+# URL: ${url}
+# Packager: ${author}
+# Depends on: ${packages}
+
+name=${name}
+version=${version}
+release=${release}
+source=(${sources})
+
+build() {
+	cd $name-$version
+	
+	${build_instructions}
+}
+</snippet>
+
+<snippet shortcut="gpl" language="common">
+# ${program_name} - ${description}
+#
+# Copyright (C) ${year} ${author_name} &lt;${email_address}&gt;
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+${cursor}
+</snippet>
+
+<!-- PYTHON SNIPPETS -->
+
+<snippet shortcut="doc" language="python">
+""" ${document_string} """
+</snippet> 
+
+<snippet shortcut="!p" language="python">
+#!/usr/bin/env python
+# -*- coding: utf8 -*-
+</snippet>
+
+<snippet shortcut="forin" language="python">
+for ${element} in ${list}:
+	${cursor}
+</snippet>
+
+<snippet shortcut="foran" language="python">
+for ${index} in range(${foo}):
+	${cursor}
+</snippet>
+
+<snippet shortcut="foritems" language="python">
+for ${key}, ${value} in ${dictionary}.items():
+	${cursor}"
+</snippet>
+
+<snippet shortcut="if" language="python">
+if ${condition}:
+	${statement}
+</snippet>
+
+<snippet shortcut="ifel" language="python">
+if ${condition}:
+	${statement}
+else:
+	${statement}
+</snippet>
+
+<snippet shortcut="cl" language="python">
+class ${name}:
+	${cursor}
+</snippet>
+
+<snippet shortcut="clo" language="python">
+class ${name}(object):
+	${cursor}
+</snippet>
+
+<snippet shortcut="cli" language="python">
+class ${name}(${parent}):
+	${cursor}
+</snippet>
+
+<snippet shortcut="init" language="python">
+def __init__(self):
+	${cursor}
+</snippet>
+
+<snippet shortcut="re" language="python">
+return ${foo}
+</snippet>
+
+<snippet shortcut="def" language="python">
+def ${foo}:
+	${cursor}
+</snippet>
+
+<snippet shortcut="kv" language="python">
+${key} : ${value}
+</snippet>
+
+<snippet shortcut="defv" language="python">
+def ${foo}(${bar}):
+	${cursor}
+</snippet>
+
+<snippet shortcut="var" language="python">
+${foo} = ${value}
+</snippet>
+
+<snippet shortcut="frim" language="python">
+from ${module} import ${foo}
+</snippet>
+
+<snippet shortcut="im" language="python">
+import ${module}
+</snippet>
+
+<snippet shortcut="ifname" language="python">
+if __name__ == "__main__":
+	${cursor}
+</snippet>
+
+<snippet shortcut="pr" language="python">
+print "${cursor}"
+</snippet>
+
+<snippet shortcut="prv" language="python">
+print "${cursor}" % (${variable})
+</snippet>
+
+<snippet shortcut="dict" language="python">
+${dictionary} = { ${cursor} }
+</snippet>
+
+<!-- RUBY SNIPPETS -->
+
+<snippet shortcut="!r" language="ruby">
+#!/usr/bin/ruby
+</snippet>
+
+<snippet shortcut="class" language="ruby">
+class ${foo}
+	${cursor}
+end
+</snippet>
+
+<snippet shortcut="def" language="ruby">
+def ${foo}
+	${cursor}
+end
+</snippet>
+
+<snippet shortcut="req" language="ruby">
+require '${foo}'
+</snippet>
+
+<snippet shortcut="if" language="ruby">
+if ${condition}
+	${cursor}
+end
+</snippet>
+
+<snippet shortcut="el" language="ruby">
+else
+	${cursor}
+</snippet>
+
+<snippet shortcut="elc" language="ruby">
+else ${condition}
+	${cursor}
+</snippet>
+
+<snippet shortcut="ifel" language="ruby">
+if ${condition}
+	${cursor}
+else
+	${cursor}
+end
+</snippet>
+
+<snippet shortcut="un" language="ruby">
+unless ${condition}
+</snippet>
+
+<snippet shortcut="each" language="ruby">
+each { |element| ${cursor} }
+</snippet>
+
+<snippet shortcut="init" language="ruby">
+def initialize()
+	${cursor}
+end
+</snippet>
+
+<snippet shortcut="forin" language="ruby">
+for ${element} in $collection
+	${cursor}
+end
+</snippet>
+
+<snippet shortcut="^:" language="ruby">
+:${key} =&gt; "${value}"
+</snippet>
+
+<snippet shortcut="pr" language="ruby">
+puts "${hello,world}"
+</snippet>
+
+<snippet shortcut="va" language="ruby">
+${variable} = ${foo}
+</snippet>
+
+<snippet shortcut="iva" language="ruby">
+@${variable} = ${foo}
+</snippet>
+
+<snippet shortcut="von" language="ruby">
+${variable} = ${Object}.new(${params})
+</snippet>
+
+<snippet shortcut="ova" language="ruby">
+${Object}.${variable} = ${foo}
+</snippet>
+
+<snippet shortcut="wh" language="ruby">
+while ${condition}
+	${cursor}
+end
+</snippet>
+
+<!-- RUBY ON RAILS SNIPPETS -->
+
+<snippet shortcut="^x" language="rails">
+&lt;% ${cursor} %&gt;
+</snippet>
+
+<snippet shortcut="^p" language="rails">
+params[:${id}]
+</snippet>
+
+<snippet shortcut="^j" language="rails">
+session[:${user}]
+</snippet>
+
+<snippet shortcut="^z" language="rails">
+&lt;%= ${cursor} %&gt;
+</snippet>
+
+<snippet shortcut="flash" language="rails">
+flash[:${notice}] = "${message}"
+</snippet>
+
+<snippet shortcut="mct" language="rails">
+create_table :${table} do |t|
+	${cursor}
+end
+</snippet>
+
+<snippet shortcut="mdt" language="rails">
+drop_table :${table}
+</snippet>
+
+<snippet shortcut="mcc" language="rails">
+${t}.column :${name}, :${type}
+</snippet>
+
+<snippet shortcut="rea" language="rails">
+redirect_to :action =&gt; "${index}"
+</snippet>
+
+<snippet shortcut="rec" language="rails">
+redirect_to :controller =&gt; "${items}"
+</snippet>
+
+<snippet shortcut="reca" language="rails">
+redirect_to :controller =&gt; "${items} :action =&gt; "${list}"
+</snippet>
+
+<snippet shortcut="recai" language="rails">
+redirect_to :controller =&gt; "${items} :action =&gt; "${show} :id =&gt; "${item}"
+</snippet>
+
+<snippet shortcut="ra" language="rails">
+render :action =&gt; "${action}"
+</snippet>
+
+<snippet shortcut="ral" language="rails">
+render :action =&gt; "${action} :layout =&gt; "${layoutname}"
+</snippet>
+
+<snippet shortcut="rf" language="rails">
+render :file =&gt; "${filepath}"
+</snippet>
+
+<snippet shortcut="rfu" language="rails">
+render :file =&gt; "${filepath} :use_full_path =&gt; ${false}
+</snippet>
+
+<snippet shortcut="ril" language="rails">
+render :inline =&gt; "${erb} :locals =&gt; { :name =&gt; "${value}" }
+</snippet>
+
+<snippet shortcut="rit" language="rails">
+render :inline =&gt; "${erb} :type =&gt; "${xml}"
+</snippet>
+
+<snippet shortcut="rl" language="rails">
+render :layout =&gt; "${layoutname}"
+</snippet>
+
+<snippet shortcut="rn" language="rails">
+render :nothing =&gt; ${true}
+</snippet>
+
+<snippet shortcut="rns" language="rails">
+render :nothing =&gt; ${true}, :status =&gt; ${401}
+</snippet>
+
+<snippet shortcut="rp" language="rails">
+render :partial =&gt; "${item}"
+</snippet>
+
+<snippet shortcut="rpc" language="rails">
+render :partial =&gt; "${item} :collection =&gt; ${items}
+</snippet>
+
+<snippet shortcut="rpl" language="rails">
+render :partial =&gt; "${item} :locals =&gt; { :name =&gt; "${value}" }
+</snippet>
+
+<snippet shortcut="rpo" language="rails">
+render :partial =&gt; "${item} :object =&gt; ${object}
+</snippet>
+
+<snippet shortcut="rps" language="rails">
+render :partial =&gt; "${item} :status =&gt; ${500}
+</snippet>
+
+<snippet shortcut="rt" language="rails">
+render :text =&gt; "${text}"
+</snippet>
+
+<snippet shortcut="rtl" language="rails">
+render :text =&gt; "${text} :layout =&gt; "${layoutname}"
+</snippet>
+
+<snippet shortcut="rtlt" language="rails">
+render :text =&gt; "${text} :layout =&gt; ${true}
+</snippet>
+
+<snippet shortcut="rts" language="rails">
+render :text =&gt; "${text} :status =&gt; ${401}
+</snippet>
+
+<snippet shortcut="rcea" language="rails">
+render_component :action =&gt; "${index}"
+</snippet>
+
+<snippet shortcut="rcec" language="rails">
+render_component :controller =&gt; "${items}"
+</snippet>
+
+<snippet shortcut="rceca" language="rails">
+render_component :controller =&gt; "${items}" :action =&gt; "${index}"
+</snippet>
+
+<snippet shortcut="bt" language="rails">
+belongs_to :${object}, :class_name =&gt; "${ClassName}" :foreign_key =&gt; "${object_id}"
+</snippet>
+
+<snippet shortcut="habtm" language="rails">
+has_and_belongs_to_many :${object}, :join_table =&gt; "${table_name}" :foreign_key =&gt; "${object_id}"
+</snippet>
+
+<snippet shortcut="ho" language="rails">
+has_one :${object}, :class_name =&gt; "${ClassName}" :foreign_key =&gt; "${object_id}"
+</snippet>
+
+<snippet shortcut="hm" language="rails">
+has_many :${objects}, :class_name =&gt; "${ClassName}" :foreign_key =&gt; "${objects_id}"
+</snippet>
+
+<snippet shortcut="va" language="rails">
+validates_associated :${attribute}, :on =&gt; :${create}
+</snippet>
+
+<snippet shortcut="vaif" language="rails">
+validates_associated :${attribute}, :on =&gt; :${create}, :if =&gt; proc { |obj| obj.${condition} }
+</snippet>
+
+<snippet shortcut="vc" language="rails">
+validates_confirmation_of :${attribute}, :on =&gt; :${create}, :message =&gt; "${should match confirmation}"
+</snippet>
+
+<snippet shortcut="vcif" language="rails">
+validates_confirmation_of :${attribute}, :on =&gt; :${create}, :message =&gt; "${should match confirmation}" :if =&gt; proc { |obj| obj.${condition} }
+</snippet>
+
+<snippet shortcut="ve" language="rails">
+validates_exclusion_of :${attribute}, :in =&gt; ${enumerable}, :on =&gt; ${create}, :message =&gt; "${is not allowed}"
+</snippet>
+
+<snippet shortcut="veif" language="rails">
+validates_exclusion_of :${attribute}, :in =&gt; ${enumerable}, :on =&gt; ${create}, :message =&gt; "${is not allowed}" :if =&gt; proc { |obj| obj.${condition} }
+</snippet>
+
+<snippet shortcut="vl" language="rails">
+validates_length_of :${attribute}, :within =&gt; ${3..20}, :on =&gt; :${create}, :message =&gt; "${must be present}"
+</snippet>
+
+<snippet shortcut="vp" language="rails">
+validates_presence_of :${attribute}, :on =&gt; :${create}, :message =&gt; "${cant't be blank}"
+</snippet>
+
+<snippet shortcut="vpif" language="rails">
+validates_presence_of :${attribute}, :on =&gt; :${create}, :message =&gt; "${cant't be blank}" :if =&gt; proc { |obj| obj.${condition} }
+</snippet>
+
+<snippet shortcut="vu" language="rails">
+validates_uniqueness_of :${attribute}, :on =&gt; ${create}, :message =&gt; "${must be unique}"
+</snippet>
+
+<snippet shortcut="vuif" language="rails">
+validates_uniqueness_of :${attribute}, :on =&gt; ${create}, :message =&gt; "${must be unique}" :if =&gt; proc { |obj| obj.${condition} }
+</snippet>
+
+<snippet shortcut="ft" language="rails">
+&lt;%= form_tag :action =&gt; "update" %&gt;
+</snippet>
+
+<snippet shortcut="lia" language="rails">
+&lt;%= link_to "${text}" :action =&gt; "${index}" %&gt;
+</snippet>
+
+<snippet shortcut="liai" language="rails">
+&lt;%= link_to "${text}" :action =&gt; "${index}" :id =&gt; @${item} %&gt;
+</snippet>
+
+<snippet shortcut="lic" language="rails">
+&lt;%= link_to "${text}" :controller =&gt; "${items}" %&gt;
+</snippet>
+
+<snippet shortcut="lica" language="rails">
+&lt;%= link_to "${text}" :controller =&gt; "${items}" :action =&gt; "${index}" %&gt;
+</snippet>
+
+<snippet shortcut="licia" language="rails">
+&lt;%= link_to "${text}" :controller =&gt; "${items}" :action =&gt; "${index}" :id =&gt; @${item} %&gt;
+</snippet>
+
+<snippet shortcut="eforin" language="rails">
+&lt;% for ${item} in @${items} %&gt;
+	&lt;%= ${item}.${name} %&gt;
+&lt;% end %&gt;
+</snippet>
+
+</snippets>

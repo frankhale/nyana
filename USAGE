@@ -1,0 +1,11 @@
+At the present time there is no dependency checking. If you have recent versions
+of python, python-gnome-extras then you should be able to run this application.
+
+To run untar the tarball and run the nyana script. It can accept files on the 
+commandline to load.
+
+ctrl+o - open file dialog
+ctrl+s - saves an open file or allows you to save as if the file has not been saved.
+ctrl+f - find/replace
+ctrl+t - built in terminal
+ctrl+g - goto specific line

@@ -1,0 +1,32 @@
+Plugins in Nyana are easy to write. Plugins must conform to a simple convention
+for them to work.
+
+Example:
+
+import pygtk 
+pygtk.require('2.0')
+
+import gtk
+
+class SamplePlugin(object):
+	
+	metadata = {
+		"name" : "Sample Plugin", 
+		"authors" : ["Frank Hale <frankhale@gmail.com>"],
+		"website" : "http://nyana.sourceforge.net",
+		"version" : "0.1",
+		"development status" : "stable",
+		"date" : "29 Oct 2006",
+		"enabled" : True,
+		"short description" : "A sample plugin",
+		"long description" : "A sample plugin that provides foo functionality."
+	}
+	
+	def __init__(self, editor):
+		self.editor = editor
+
+	def load(self):
+		pass
+		
+	def unload(self):
+		pass

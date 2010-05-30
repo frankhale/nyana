@@ -1,0 +1,148 @@
+#!/usr/bin/env python
+#
+# Editor Foundation - Provides the core foundation for a GTK+ based editor.
+#
+# This class forces some assumptions on the GUI in that it assumes an SDI
+# interface with areas at the top and bottom exposable to plugins for such
+# features as goto bar, search/replace bar, etc..
+#
+# Copyright (C) 2006-2009 Frank Hale <frankhale@gmail.com>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+import pygtk 
+pygtk.require('2.0')
+
+import gtk
+import gtk.gdk
+import gtksourceview2
+import pango
+import os.path
+import sys
+
+from core import EventManager
+from core import Document
+from core import DocumentManager
+from core import PluginManager
+
+class Editor(object):
+	def __init__(self):
+		self.name = "Nyana"		
+		self.version = "0.16"
+		self.author = "Frank Hale"
+		self.author_email = "<frankhale@gmail.com>"
+		self.date = "28 July 2007"
+
+		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+		self.window.connect("destroy", self.destroy)
+		self.window.resize(800,600)
+		self.window.set_title(self.name)
+		
+		self.SCRIPT_PATH = os.path.abspath( os.path.dirname(__file__) )
+		#self.ICON_PATH = os.path.join( self.SCRIPT_PATH, "text-editor.svg" ) 
+		
+		#self.window.set_icon_from_file(self.ICON_PATH)
+
+		self.buff = gtksourceview2.Buffer()
+		self.source_view = gtksourceview2.View(self.buff)
+
+		self.scrolled = gtk.ScrolledWindow()
+		self.scrolled.set_policy(gtk.POLICY_AUTOMATIC,gtk.POLICY_AUTOMATIC)
+		self.scrolled.set_shadow_type(gtk.SHADOW_IN)
+		self.scrolled.add(self.source_view)
+		
+		self.main_vbox = gtk.VBox()
+		self.top_vbox = gtk.VBox()
+		self.main_vbox.pack_start(self.top_vbox, False, False, 0)
+		self.main_vbox.pack_start(self.scrolled, True, True, 0)
+
+		self.bottom_vbox = gtk.VBox()
+		self.main_vbox.pack_start(self.bottom_vbox, False, False, 0)
+		
+		self.status_bar_vbox = gtk.VBox()
+		self.main_vbox.pack_end(self.status_bar_vbox, False, False, 0)
+
+		self.window.add(self.main_vbox)
+
+		self.accel_group = gtk.AccelGroup()
+		self.window.add_accel_group(self.accel_group)
+
+		self.document_manager = DocumentManager()
+		self.event_manager = EventManager(self)
+
+		# Intialize the plugin manager and load the plugins
+		self.plugin_manager = PluginManager(self)
+		self.init_plugins()
+
+		self.scrolled.show_all()
+		self.top_vbox.show()
+		self.status_bar_vbox.show()
+		self.bottom_vbox.show()
+		self.main_vbox.show()
+		self.window.show()
+
+	# Convenience method to get the current text from the buffer
+	def get_text(self):
+		return self.buff.get_text(self.buff.get_start_iter(), self.buff.get_end_iter())
+
+	#def reload_plugins(self):
+	#	pass
+
+	def init_plugins(self):
+		print "initializing plugins..."
+		
+		# The default location for plugins is within the editor source directory
+		# in a folder named plugins
+		self.plugin_manager.intialize_plugins( os.path.join ( self.SCRIPT_PATH, "plugins") )
+		
+		# Test to see if ~/.nyana/plugins exists and optionally load 
+		# plugins from there as well.
+		user_plugins = os.path.join(os.path.expanduser("~"), ".nyana/plugins")
+		
+		if(os.path.exists(user_plugins)):
+			print "loading plugins from: "
+			self.plugin_manager.intialize_plugins(user_plugins)
+		#else:
+		#	print "%s : directory does not exists" % (user_plugins		
+
+	def new_instance(self):
+		e = Editor()
+		e.main()
+
+	def destroy(self, widget, data=None):
+		self.plugin_manager.tear_down_all_plugins()
+		gtk.main_quit()
+
+	def main(self):
+		gtk.main()
+
+# Run the editor
+if __name__ == "__main__":
+	instances = []
+
+	if(sys.argv):	
+		for arg in sys.argv:
+			if not (arg in __file__):
+				if(os.path.exists(arg) and not os.path.isdir(arg)):
+					e = Editor()
+					e.event_manager.fire_event("open_file", {"filename" : os.path.abspath(arg)})
+					instances.append(e)
+	
+		if(instances):
+			for instance in instances:
+				instance.main()
+		else:
+			e = Editor()
+			e.main()
