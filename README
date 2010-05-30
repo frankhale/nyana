@@ -1,12 +1,13 @@
 Nyana is a small programmers text editor with a plugin system and an 
-abbreviation replacement mechanism similar to Scribes <http://scribes.sf.net>. 
+abbreviation replacement mechanism similar to Scribes http://scribes.sf.net
 
 The overall aim of Nyana is to be similar in simplicity to Windows Notepad
 but with a set of features geared to programmers. The editor is not ambitious 
 and is meant to be lightweight and easily used.
 
-Website: http://code.google.com/p/nyana/
 Author: Frank Hale <frankhale@gmail.com>
-Date: 25 June 2009
+Last code update: 25 June 2009
 
 The code and documentation is released under the terms of the GNU GPL license version 3.
+
+Date: 30 May 2010
