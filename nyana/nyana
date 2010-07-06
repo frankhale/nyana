@@ -6,11 +6,13 @@
 # interface with areas at the top and bottom exposable to plugins for such
 # features as goto bar, search/replace bar, etc..
 #
-# Copyright (C) 2006-2009 Frank Hale <frankhale@gmail.com>
+# Copyright (C) 2006-2010 Frank Hale <frankhale@gmail.com>
+#
+# ##sandbox - irc.freenode.net
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
+# as published by the Free Software Foundation; either version 3
 # of the License, or (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
@@ -21,6 +23,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import pygtk 
 pygtk.require('2.0')
@@ -40,23 +45,28 @@ from core import PluginManager
 class Editor(object):
 	def __init__(self):
 		self.name = "Nyana"		
-		self.version = "0.16"
+		self.version = "0.17"
 		self.author = "Frank Hale"
 		self.author_email = "<frankhale@gmail.com>"
-		self.date = "28 July 2007"
+		self.date = "5 July 2010"
 
 		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
 		self.window.connect("destroy", self.destroy)
 		self.window.resize(800,600)
 		self.window.set_title(self.name)
 		
-		self.SCRIPT_PATH = os.path.abspath( os.path.dirname(__file__) )
+		self.SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
 		#self.ICON_PATH = os.path.join( self.SCRIPT_PATH, "text-editor.svg" ) 
-		
 		#self.window.set_icon_from_file(self.ICON_PATH)
 
 		self.buff = gtksourceview2.Buffer()
 		self.source_view = gtksourceview2.View(self.buff)
+		self.source_view.set_indent_width(2)
+		self.source_view.set_tab_width(2)
+		
+		self.scheme_manager = gtksourceview2.StyleSchemeManager()
+		self.buff.set_style_scheme(self.scheme_manager.get_scheme("brown"))
+		print self.scheme_manager.get_scheme_ids()
 
 		self.scrolled = gtk.ScrolledWindow()
 		self.scrolled.set_policy(gtk.POLICY_AUTOMATIC,gtk.POLICY_AUTOMATIC)

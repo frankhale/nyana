@@ -22,13 +22,11 @@ pygtk.require('2.0')
 import gtk
 from vte import Terminal
 
-# This is just the beginning, this is definitely not finished!
-
 class TerminalPlugin(object):
 	metadata = {
 		"name" : "Terminal Plugin", 
 		"authors" : ["Frank Hale <frankhale@gmail.com>"],
-		"website" : "http://nyana.sourceforge.net",
+		"website" : "http://github.com/frankhale/nyana",
 		"version" : "0.1",
 		"development status" : "alpha",
 		"date" : "29 Oct 2006",
@@ -71,24 +69,24 @@ class TerminalPlugin(object):
 				
 	def terminal_exited(self, term):
 		term.feed("Terminal exited\r\n", "1;34")
-        	term.feed("Press any key to close.")
-        	term.connect("commit", self.restart_cb)
+    term.feed("Press any key to close.")
+    term.connect("commit", self.restart_cb)
 		
-   	def restart_cb(self, term, data, datalen):
-        	self.terminal.reset(True, True)
-        	self.terminal.destroy()
-        	self.show()
-        	self.editor.bottom_vbox.remove(self.bar_table)
-        	self.initiate_terminal()
+  def restart_cb(self, term, data, datalen):
+    self.terminal.reset(True, True)
+    self.terminal.destroy()
+    self.show()
+    self.editor.bottom_vbox.remove(self.bar_table)
+    self.initiate_terminal()
         	   
-        def show(self):
-        	if(self.visible):
-			self.bar_table.hide_all()
-			self.visible=False
-		else:
-			self.bar_table.show_all()
-			self.visible=True
-			self.terminal.grab_focus()
+  def show(self):
+    if(self.visible):
+    self.bar_table.hide_all()
+    self.visible=False
+  else:
+    self.bar_table.show_all()
+    self.visible=True
+    self.terminal.grab_focus()
         	        	
 	def show_cb(self, accel_group, acceleratable, keyval, modifier):
 		self.show()

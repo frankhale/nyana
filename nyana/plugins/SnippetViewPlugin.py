@@ -1,11 +1,13 @@
 # SnippetViewPlugin - Provides a templated/abbreviation expansion mechanism for 
 # the editor.
 #
-# Copyright (C) 2006-2007 Frank Hale <frankhale@gmail.com>
+# Copyright (C) 2006-2010 Frank Hale <frankhale@gmail.com>
+#
+# ##sandbox - irc.freenode.net
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
+# as published by the Free Software Foundation; either version 3
 # of the License, or (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
@@ -16,10 +18,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import pygtk 
 pygtk.require('2.0')
 
+import gio
 import gtk
 import gtk.gdk
 import gtksourceview2
@@ -101,7 +107,7 @@ class SnippetViewPlugin(object):
 	metadata = {
 		"name" : "Snippet Source View Plugin", 
 		"authors" : ["Frank Hale <frankhale@gmail.com>"],
-		"website" : "http://nyana.sourceforge.net",
+		"website" : "http://github.com/frankhale/nyana",
 		"version" : "0.6.0",
 		"development status" : "beta",
 		"date" : "31 JULY 2007",
@@ -143,7 +149,7 @@ class SnippetViewPlugin(object):
 		
 		### Comment this out if you don't want Monospace and want the default
 		### system font. Or change to suit your needs. 
-		default_font = pango.FontDescription("Monospace 12")
+		default_font = pango.FontDescription("Monospace 10")
 		
 		if default_font:
 			self.editor.source_view.modify_font(default_font)
@@ -215,24 +221,12 @@ class SnippetViewPlugin(object):
 			print "(%s) does not exist" % (filename)
 			return
 
-		#lang = ""
-		#mime_type=""
-
-		#manager = gtksourceview2.LanguageManager()
+		print "filename = (%s)" % (filename)
 		
-		#if filename.endswith(".py"):
-		#	lang="python"
-		#elif filename.endswith(".rb"):
-		#	lang="ruby"
-
-		#if len(lang) > 0:
 		language = self.get_language(filename)
-			#mime_type = language.get_mime_types()[0]
-			#self.mime_type = mime_type
-						
-		#print "Switching syntax highlight for the following mime-type: " + mime_type
 
 		if language:
+			self.editor.buff.set_highlight_syntax(True)
 			self.editor.buff.set_language(language)
 
 			#print "Setting the snippets to the following language mime-type: " + mime_type
@@ -240,6 +234,7 @@ class SnippetViewPlugin(object):
 			self.load_snippets()
 		else:
 			print "A syntax highlight mode for this mime-type does not exist."
+			self.editor.buff.set_highlight_syntax(False)
 
 	def complete_special_chars(self, widget, char):
 		curr_iter = self.editor.buff.get_iter_at_mark( self.editor.buff.get_insert() )
@@ -585,9 +580,10 @@ class SnippetViewPlugin(object):
 		try:
 			if uri is None: return None
 			from gnomevfs import get_mime_type
-			mimetype = get_mime_type(uri.strip())
-			self.mime_type = mimetype
-			language = self.__get_language_for_mime_type(mimetype)
+		
+			self.mime_type = gio.File(uri.strip()).query_info("*").get_content_type()
+
+			language = self.__get_language_for_mime_type(self.mime_type)
 		except RuntimeError:
 			print "Caught runtime error when determining mimetype or language"
 			return None

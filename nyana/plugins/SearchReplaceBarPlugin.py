@@ -1,10 +1,12 @@
 # SearchReplaceBarPlugin - Provides a search and replace bar for the editor.
 #
-# Copyright (C) 2006 Frank Hale <frankhale@gmail.com>
+# Copyright (C) 2006-2010 Frank Hale <frankhale@gmail.com>
+#
+# ##sandbox - irc.freenode.net
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
+# as published by the Free Software Foundation; either version 3
 # of the License, or (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
@@ -15,6 +17,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import pygtk 
 pygtk.require('2.0')
@@ -26,7 +31,7 @@ class SearchReplaceBarPlugin(object):
 	metadata = {
 		"name" : "Search / Replace Bar Plugin", 
 		"authors" : ["Frank Hale <frankhale@gmail.com>"],
-		"website" : "http://nyana.sourceforge.net",
+		"website" : "http://github.com/frankhale/nyana",
 		"version" : "0.6",
 		"development status" : "alpha",
 		"date" : "30 Oct 2006",
