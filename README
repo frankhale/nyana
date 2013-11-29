@@ -5,7 +5,7 @@ The overall aim of Nyana is to be similar in simplicity to Windows Notepad
 but with a set of features geared to programmers. The editor is not ambitious 
 and is meant to be lightweight and easily used.
 
-CTRL+0 = opens the file dialog so you can load a file
+CTRL+O = opens the file dialog so you can load a file
 CTRL+S = saves the current file
 CTRL+F = search/replace
 CTRL+G = goto line
